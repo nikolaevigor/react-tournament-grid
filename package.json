@@ -1,6 +1,6 @@
 {
   "name": "react-tournament-grid",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React tournament grid with simple underlying data model",
   "main": "./dist/index.js",
   "scripts": {
@@ -28,5 +28,7 @@
     "babel-preset-react": "^6.24.1",
     "react-tournament-grid": "^0.0.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react": "^15.6.1"
+  }
 }
