@@ -1,2 +1,2 @@
-export { Series } from './components/Series';
-export { Grid } from './components/Grid';
+export { default as Series } from './components/Series';
+export { default as Grid } from './components/Grid';

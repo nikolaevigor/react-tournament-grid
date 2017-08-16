@@ -1,21 +1,18 @@
 {
   "name": "react-tournament-grid",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "React tournament grid with simple underlying data model",
   "main": "./dist/index.js",
   "scripts": {
     "build": "babel src --presets babel-preset-es2015 --out-dir dist",
+    "prepublish": "yarn build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nikolaevigor/react-tournament-grid.git"
   },
-  "keywords": [
-    "react",
-    "tournament",
-    "grid"
-  ],
+  "keywords": ["react", "tournament", "grid"],
   "author": "Igor Nikolaev <nikolaevigor95@gmail.com> (http://nikolaev.io)",
   "license": "ISC",
   "bugs": {
