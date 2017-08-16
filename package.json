@@ -12,13 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/nikolaevigor/react-tournament-grid.git"
   },
-  "keywords": [
-    "react",
-    "tournament",
-    "grid"
-  ],
+  "keywords": ["react", "tournament", "grid"],
   "author": "Igor Nikolaev <nikolaevigor95@gmail.com> (http://nikolaev.io)",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/nikolaevigor/react-tournament-grid/issues"
   },

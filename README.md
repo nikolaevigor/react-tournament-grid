@@ -3,6 +3,14 @@
 This small package presents simple components to implement tournament grid UI
 with transparent data model.
 
+[NPM Page](https://www.npmjs.com/package/react-tournament-grid)
+
+## Installation
+
+```
+yarn add react-tournament-bracket
+```
+
 ## Data model
 
 ### Series
