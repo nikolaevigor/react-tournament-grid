@@ -6,6 +6,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
 var _Series = require('./Series');
 
 var _Series2 = _interopRequireDefault(_Series);
@@ -30,7 +34,7 @@ function drawConnection(stageId, seriesId, positioning, xSpace) {
   var x2 = positioning[targetStageId][targetSeriesId]['x'] + direction * 200;
   var y2 = positioning[targetStageId][targetSeriesId]['y'] + 25;
 
-  return React.createElement('path', {
+  return _react2.default.createElement('path', {
     d: 'M' + x1 + ' ' + y1 + ' L' + (x1 - direction * xSpace / 2) + ' ' + y1 + ' L' + (x2 + (direction > 0 ? 0 : 200) + direction * xSpace / 2) + ' ' + y2 + ' L' + ((direction > 0 ? 0 : 200) + x2) + ' ' + y2,
     stroke: 'white',
     fill: 'none'
@@ -73,7 +77,7 @@ var Grid = function (_Component) {
         return sum + maxSeriesOffset / Math.pow(2, idx);
       }) + seriesHeight;
 
-      return React.createElement(
+      return _react2.default.createElement(
         'svg',
         { width: width, height: height, viewBox: '0 0 100% ' + height },
         stageList.map(function (stageIdx) {
@@ -106,13 +110,13 @@ var Grid = function (_Component) {
               return t.id === secondTeamId;
             })[0];
             var score = (0, _helpers.getScoreFromGames)(currentSeries ? currentSeries.games : []);
-            return React.createElement(
+            return _react2.default.createElement(
               'g',
               null,
-              React.createElement(
+              _react2.default.createElement(
                 'g',
                 null,
-                React.createElement(_Series2.default, {
+                _react2.default.createElement(_Series2.default, {
                   series: currentSeries,
                   firstText: firstTeam ? firstTeam.name : 'TBD',
                   secondText: secondTeam ? secondTeam.name : 'TBD',
@@ -125,7 +129,7 @@ var Grid = function (_Component) {
                   y: y
                 })
               ),
-              React.createElement(
+              _react2.default.createElement(
                 'g',
                 null,
                 stageIdx !== 0 && drawConnection(stageIdx, seriesIdx, positioning, xSpace, direction)
@@ -138,6 +142,6 @@ var Grid = function (_Component) {
   }]);
 
   return Grid;
-}(Component);
+}(_react.Component);
 
 exports.default = Grid;
