@@ -1,3 +1,5 @@
+import React, { Component } from 'react';
+
 import Series from './Series';
 import { range, getScoreFromGames, findMaxStage, findSeries } from './helpers';
 
