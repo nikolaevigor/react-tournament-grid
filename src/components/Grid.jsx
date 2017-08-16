@@ -30,10 +30,11 @@ class Grid extends Component {
       seriesWidth = 200,
       seriesHeight = 50,
       xSpace = 30,
-      direction
+      ySpace = 50,
+      direction = -1
     } = this.props;
     const maxStage = findMaxStage(seriesList);
-    const maxSeriesOffset = maxStage * seriesWidth;
+    const maxSeriesOffset = ySpace * Math.pow(2, maxStage);
     const stageList = range(maxStage + 1);
     const width = (seriesWidth + xSpace) * (maxStage + 1) - xSpace;
     const positioning = {};
@@ -46,81 +47,85 @@ class Grid extends Component {
       seriesHeight;
 
     return (
-      <svg width={width} height={height} viewBox={`0 0 100% ${height}`}>
-        {stageList.map(stageIdx => {
-          positioning[stageIdx] = {};
-          return range(Math.pow(2, stageIdx)).map(seriesIdx => {
-            let x, y;
-            if (stageIdx === 0) {
-              x = direction > 0 ? 0 : width - seriesWidth;
-              y = height / 2 - seriesHeight / 2;
-            } else if (seriesIdx % 2 === 0) {
-              x =
-                positioning[stageIdx - 1][Math.floor(seriesIdx / 2)]['x'] +
-                direction * (seriesWidth + xSpace);
-              y =
-                positioning[stageIdx - 1][Math.floor(seriesIdx / 2)]['y'] -
-                maxSeriesOffset / Math.pow(2, stageIdx);
-            } else {
-              x =
-                positioning[stageIdx - 1][Math.floor(seriesIdx / 2)]['x'] +
-                direction * (seriesWidth + xSpace);
-              y =
-                positioning[stageIdx - 1][Math.floor(seriesIdx / 2)]['y'] +
-                maxSeriesOffset / Math.pow(2, stageIdx);
-            }
-            positioning[stageIdx][seriesIdx] = {
-              x: x,
-              y: y
-            };
+      <div style={{ overflow: 'scroll' }}>
+        <svg width={width} height={height}>
+          {stageList.map(stageIdx => {
+            positioning[stageIdx] = {};
+            return range(Math.pow(2, stageIdx)).map(seriesIdx => {
+              let x, y;
+              if (stageIdx === 0) {
+                x = direction > 0 ? 0 : width - seriesWidth;
+                y = height / 2 - seriesHeight / 2;
+              } else if (seriesIdx % 2 === 0) {
+                x =
+                  positioning[stageIdx - 1][Math.floor(seriesIdx / 2)]['x'] +
+                  direction * (seriesWidth + xSpace);
+                y =
+                  positioning[stageIdx - 1][Math.floor(seriesIdx / 2)]['y'] -
+                  maxSeriesOffset / Math.pow(2, stageIdx);
+              } else {
+                x =
+                  positioning[stageIdx - 1][Math.floor(seriesIdx / 2)]['x'] +
+                  direction * (seriesWidth + xSpace);
+                y =
+                  positioning[stageIdx - 1][Math.floor(seriesIdx / 2)]['y'] +
+                  maxSeriesOffset / Math.pow(2, stageIdx);
+              }
+              positioning[stageIdx][seriesIdx] = {
+                x: x,
+                y: y
+              };
 
-            const currentSeries = findSeries(stageIdx, seriesIdx, seriesList);
-            const firstTeamId = currentSeries ? currentSeries.first_team : null;
-            const secondTeamId = currentSeries
-              ? currentSeries.second_team
-              : null;
-            const firstTeam = this.props.teams.filter(
-              t => t.id === firstTeamId
-            )[0];
-            const secondTeam = this.props.teams.filter(
-              t => t.id === secondTeamId
-            )[0];
-            const score = getScoreFromGames(
-              currentSeries ? currentSeries.games : []
-            );
-            return (
-              <g>
+              const currentSeries = findSeries(stageIdx, seriesIdx, seriesList);
+              const firstTeamId = currentSeries
+                ? currentSeries.first_team
+                : null;
+              const secondTeamId = currentSeries
+                ? currentSeries.second_team
+                : null;
+              const firstTeam = this.props.teams.filter(
+                t => t.id === firstTeamId
+              )[0];
+              const secondTeam = this.props.teams.filter(
+                t => t.id === secondTeamId
+              )[0];
+              const score = getScoreFromGames(
+                currentSeries ? currentSeries.games : []
+              );
+              return (
                 <g>
-                  {
-                    <Series
-                      series={currentSeries}
-                      firstText={firstTeam ? firstTeam.name : 'TBD'}
-                      secondText={secondTeam ? secondTeam.name : 'TBD'}
-                      firstScore={score[0]}
-                      secondScore={score[1]}
-                      onClick={() => {
-                        this.handleSeriesClick(currentSeries);
-                      }}
-                      x={x}
-                      y={y}
-                    />
-                  }
+                  <g>
+                    {
+                      <Series
+                        series={currentSeries}
+                        firstText={firstTeam ? firstTeam.name : 'TBD'}
+                        secondText={secondTeam ? secondTeam.name : 'TBD'}
+                        firstScore={score[0]}
+                        secondScore={score[1]}
+                        onClick={() => {
+                          this.handleSeriesClick(currentSeries);
+                        }}
+                        x={x}
+                        y={y}
+                      />
+                    }
+                  </g>
+                  <g>
+                    {stageIdx !== 0 &&
+                      drawConnection(
+                        stageIdx,
+                        seriesIdx,
+                        positioning,
+                        xSpace,
+                        direction
+                      )}
+                  </g>
                 </g>
-                <g>
-                  {stageIdx !== 0 &&
-                    drawConnection(
-                      stageIdx,
-                      seriesIdx,
-                      positioning,
-                      xSpace,
-                      direction
-                    )}
-                </g>
-              </g>
-            );
-          });
-        })}
-      </svg>
+              );
+            });
+          })}
+        </svg>
+      </div>
     );
   }
 }
