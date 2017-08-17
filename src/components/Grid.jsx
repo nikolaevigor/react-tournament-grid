@@ -31,7 +31,8 @@ class Grid extends Component {
       seriesHeight = 50,
       xSpace = 30,
       ySpace = 50,
-      direction = -1
+      direction = -1,
+      onSeriesClick
     } = this.props;
     const maxStage = findMaxStage(seriesList);
     const maxSeriesOffset = ySpace * Math.pow(2, maxStage);
@@ -103,7 +104,7 @@ class Grid extends Component {
                         firstScore={score[0]}
                         secondScore={score[1]}
                         onClick={() => {
-                          this.handleSeriesClick(currentSeries);
+                          onSeriesClick(currentSeries);
                         }}
                         x={x}
                         y={y}
