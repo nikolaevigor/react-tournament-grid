@@ -48,7 +48,7 @@ class Grid extends Component {
       seriesHeight;
 
     return (
-      <div style={{ overflow: 'scroll' }}>
+      <div style={{ overflow: 'auto' }}>
         <svg width={width} height={height}>
           {stageList.map(stageIdx => {
             positioning[stageIdx] = {};
