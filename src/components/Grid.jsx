@@ -23,7 +23,7 @@ function drawConnection(
       d={`M${x1} ${y1} L${x1 - direction * xSpace / 2} ${y1} L${x2 +
         (direction > 0 ? 0 : 200) +
         direction * xSpace / 2} ${y2} L${(direction > 0 ? 0 : 200) + x2} ${y2}`}
-      stroke="white"
+      stroke={connectionColor}
       fill="none"
     />
   );
