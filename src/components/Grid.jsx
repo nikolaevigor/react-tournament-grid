@@ -1,15 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import Series from './Series';
-import { range, getScoreFromGames, findMaxStage, findSeries } from './helpers';
+import Series from "./Series";
+import { range, getScoreFromGames, findMaxStage, findSeries } from "./helpers";
 
-function drawConnection(stageId, seriesId, positioning, xSpace, direction = 1) {
+function drawConnection(
+  stageId,
+  seriesId,
+  positioning,
+  xSpace,
+  connectionColor,
+  direction = 1
+) {
   const targetStageId = stageId - 1;
   const targetSeriesId = Math.floor(seriesId / 2);
-  const x1 = positioning[stageId][seriesId]['x'] + (direction > 0 ? 0 : 200);
-  const y1 = positioning[stageId][seriesId]['y'] + 25;
-  const x2 = positioning[targetStageId][targetSeriesId]['x'] + direction * 200;
-  const y2 = positioning[targetStageId][targetSeriesId]['y'] + 25;
+  const x1 = positioning[stageId][seriesId]["x"] + (direction > 0 ? 0 : 200);
+  const y1 = positioning[stageId][seriesId]["y"] + 25;
+  const x2 = positioning[targetStageId][targetSeriesId]["x"] + direction * 200;
+  const y2 = positioning[targetStageId][targetSeriesId]["y"] + 25;
 
   return (
     <path
@@ -32,7 +39,9 @@ class Grid extends Component {
       xSpace = 30,
       ySpace = 50,
       direction = -1,
-      onSeriesClick
+      onSeriesClick,
+      connectionColor = "white",
+      seriesStyle = null
     } = this.props;
     const maxStage = findMaxStage(seriesList);
     const maxSeriesOffset = ySpace * Math.pow(2, maxStage);
@@ -48,7 +57,7 @@ class Grid extends Component {
       seriesHeight;
 
     return (
-      <div style={{ overflow: 'auto' }}>
+      <div style={{ overflow: "auto" }}>
         <svg width={width} height={height}>
           {stageList.map(stageIdx => {
             positioning[stageIdx] = {};
@@ -59,17 +68,17 @@ class Grid extends Component {
                 y = height / 2 - seriesHeight / 2;
               } else if (seriesIdx % 2 === 0) {
                 x =
-                  positioning[stageIdx - 1][Math.floor(seriesIdx / 2)]['x'] +
+                  positioning[stageIdx - 1][Math.floor(seriesIdx / 2)]["x"] +
                   direction * (seriesWidth + xSpace);
                 y =
-                  positioning[stageIdx - 1][Math.floor(seriesIdx / 2)]['y'] -
+                  positioning[stageIdx - 1][Math.floor(seriesIdx / 2)]["y"] -
                   maxSeriesOffset / Math.pow(2, stageIdx);
               } else {
                 x =
-                  positioning[stageIdx - 1][Math.floor(seriesIdx / 2)]['x'] +
+                  positioning[stageIdx - 1][Math.floor(seriesIdx / 2)]["x"] +
                   direction * (seriesWidth + xSpace);
                 y =
-                  positioning[stageIdx - 1][Math.floor(seriesIdx / 2)]['y'] +
+                  positioning[stageIdx - 1][Math.floor(seriesIdx / 2)]["y"] +
                   maxSeriesOffset / Math.pow(2, stageIdx);
               }
               positioning[stageIdx][seriesIdx] = {
@@ -99,8 +108,8 @@ class Grid extends Component {
                     {
                       <Series
                         series={currentSeries}
-                        firstText={firstTeam ? firstTeam.name : 'TBD'}
-                        secondText={secondTeam ? secondTeam.name : 'TBD'}
+                        firstText={firstTeam ? firstTeam.name : "TBD"}
+                        secondText={secondTeam ? secondTeam.name : "TBD"}
                         firstScore={score[0]}
                         secondScore={score[1]}
                         onClick={() => {
@@ -108,6 +117,7 @@ class Grid extends Component {
                         }}
                         x={x}
                         y={y}
+                        seriesStyle={seriesStyle}
                       />
                     }
                   </g>
@@ -118,6 +128,7 @@ class Grid extends Component {
                         seriesIdx,
                         positioning,
                         xSpace,
+                        connectionColor,
                         direction
                       )}
                   </g>
