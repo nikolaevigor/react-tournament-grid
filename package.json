@@ -1,6 +1,6 @@
 {
   "name": "react-tournament-grid",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "React tournament grid with simple underlying data model",
   "main": "./dist/index.js",
   "scripts": {

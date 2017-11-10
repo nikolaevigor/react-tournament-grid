@@ -87,6 +87,10 @@ class Grid extends Component {
               };
 
               const currentSeries = findSeries(stageIdx, seriesIdx, seriesList);
+              const {
+                firstTeamAbsencePlaceholder = null,
+                secondTeamAbsencePlaceholder = null
+              } = currentSeries;
               const firstTeamId = currentSeries
                 ? currentSeries.firstTeamId
                 : null;
@@ -104,8 +108,16 @@ class Grid extends Component {
                     {
                       <Series
                         series={currentSeries}
-                        firstText={firstTeam ? firstTeam.name : "TBD"}
-                        secondText={secondTeam ? secondTeam.name : "TBD"}
+                        firstText={
+                          firstTeam
+                            ? firstTeam.name
+                            : firstTeamAbsencePlaceholder
+                        }
+                        secondText={
+                          secondTeam
+                            ? secondTeam.name
+                            : secondTeamAbsencePlaceholder
+                        }
                         firstScore={score[0]}
                         secondScore={score[1]}
                         onClick={() => {
