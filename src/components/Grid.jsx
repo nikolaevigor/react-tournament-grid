@@ -88,17 +88,13 @@ class Grid extends Component {
 
               const currentSeries = findSeries(stageIdx, seriesIdx, seriesList);
               const firstTeamId = currentSeries
-                ? currentSeries.firstTeam
+                ? currentSeries.firstTeamId
                 : null;
               const secondTeamId = currentSeries
-                ? currentSeries.secondTeam
+                ? currentSeries.secondTeamId
                 : null;
-              const firstTeam = this.props.teams.filter(
-                t => t.id === firstTeamId
-              )[0];
-              const secondTeam = this.props.teams.filter(
-                t => t.id === secondTeamId
-              )[0];
+              const firstTeam = teams.filter(t => t.id === firstTeamId)[0];
+              const secondTeam = teams.filter(t => t.id === secondTeamId)[0];
               const score = getScoreFromGames(
                 currentSeries ? currentSeries.games : []
               );

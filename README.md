@@ -21,6 +21,8 @@ Series is object that has following structure:
 {
   stage: 2,
   order: 6,
+  firstTeamId: 2,
+  secondTeamId: 15,
   games: [{...}, ..., {...}]
 }
 ```
