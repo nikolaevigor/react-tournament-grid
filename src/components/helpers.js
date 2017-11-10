@@ -3,8 +3,8 @@ export function range(target) {
 }
 
 export function getScoreFromGames(games) {
-  const firstTeamScore = games.filter(g => g.first_team_result === 'win');
-  const secondTeamScore = games.filter(g => g.second_team_result === 'win');
+  const firstTeamScore = games.filter(g => g.firstTeamResult === "win");
+  const secondTeamScore = games.filter(g => g.secondTeamResult === "win");
   return [firstTeamScore.length, secondTeamScore.length];
 }
 

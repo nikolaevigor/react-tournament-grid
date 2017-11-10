@@ -88,10 +88,10 @@ class Grid extends Component {
 
               const currentSeries = findSeries(stageIdx, seriesIdx, seriesList);
               const firstTeamId = currentSeries
-                ? currentSeries.first_team
+                ? currentSeries.firstTeam
                 : null;
               const secondTeamId = currentSeries
-                ? currentSeries.second_team
+                ? currentSeries.secondTeam
                 : null;
               const firstTeam = this.props.teams.filter(
                 t => t.id === firstTeamId

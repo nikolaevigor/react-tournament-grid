@@ -31,8 +31,8 @@ Game is used to count series score.
 
 ```
 {
-  first_team_result: 'win',
-  second_team_result: 'loose'
+  firstTeamResult: 'win',
+  secondTeamResult: 'loose'
 }
 ```
 
@@ -45,20 +45,20 @@ For example, in following example score will be 2:1:
   order: 0,
   games: [
     {
-      first_team_result: 'win',
-      second_team_result: 'loose'
+      firstTeamResult: 'win',
+      secondTeamResult: 'loose'
     },
     {
-      first_team_result: 'loose',
-      second_team_result: 'win'
+      firstTeamResult: 'loose',
+      secondTeamResult: 'win'
     },
     {
-      first_team_result: 'draw',
-      second_team_result: 'draw'
+      firstTeamResult: 'draw',
+      secondTeamResult: 'draw'
     },
     {
-      first_team_result: 'win',
-      second_team_result: 'loose'
+      firstTeamResult: 'win',
+      secondTeamResult: 'loose'
     }
   ]
 }
